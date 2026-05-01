@@ -11,15 +11,22 @@
   html, body { margin: 0; padding: 0; min-height: 100vh; }
   body {
     font-family: 'Inter Tight', -apple-system, system-ui, sans-serif;
-    background:
-      radial-gradient(circle at 20% 10%, #1a2545 0%, transparent 45%),
-      radial-gradient(circle at 80% 90%, #0c1428 0%, transparent 50%),
-      #08101f;
+    background: transparent;
     color: #efe7d4;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
   }
   #root { min-height: 100vh; }
+  html { scroll-behavior: smooth; }
+  .md-desktop-header {
+    position: sticky; top: 0; z-index: 100;
+    backdrop-filter: blur(28px) saturate(160%);
+    -webkit-backdrop-filter: blur(28px) saturate(160%);
+  }
+  .md-section-anchor { scroll-margin-top: 80px; }
+  @media (max-width: 767px) {
+    html, body, #root { height: 100%; overflow: hidden; }
+  }
   /* Inner mobile site uses these */
   .md-scroll { scroll-behavior: smooth; }
   .md-scroll::-webkit-scrollbar { width: 0; display: none; }
