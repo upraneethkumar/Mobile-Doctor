@@ -1,0 +1,484 @@
+// sections2.jsx — sales, services, why, brands, location, contact, footer
+
+const { Icon: I2, cardStyle: cs2, IMG: IM2 } = window.MD;
+const { Eyebrow: Eb, GoldRule: GR, SectionTitle: ST } = window.MDS;
+
+// ─── 02 SALES ─────────────────────────────────────────────────
+function Sales({ theme, fonts, cardKind }) {
+  const products = [
+    { n: 'Smartphones', sub: 'Flagship & mid', img: IM2.smart, big: true, t: 'NEW' },
+    { n: 'Earphones', sub: 'TWS · Bluetooth', img: IM2.earbuds, t: 'AUDIO' },
+    { n: 'Chargers', sub: 'Fast & GaN', img: IM2.charger, t: 'POWER' },
+    { n: 'Cables', sub: 'Type-C · Lightning', img: IM2.cable, t: 'CABLES' },
+    { n: 'Screen Guards', sub: 'Tempered glass', img: IM2.protector, t: 'SHIELD' },
+    { n: 'Phone Cases', sub: 'Premium covers', img: IM2.cases, t: 'COVER' },
+    { n: 'Camera Lenses', sub: 'Macro · Wide', img: IM2.lens, t: 'OPTIC' },
+    { n: 'Accessories', sub: 'Full ecosystem', img: IM2.acc, t: 'ALL' },
+  ];
+  return (
+    <section id="sec-sales" data-screen-label="02 Sales" style={{ padding: '60px 22px 40px', position: 'relative' }}>
+      <ST eyebrow="02 — Sales" title={<>The <span style={{ fontStyle: 'italic', color: theme.gold }}>showroom</span>.</>} theme={theme} fonts={fonts} />
+      <p className="reveal" style={{ fontFamily: fonts.body, fontSize: 13.5, color: theme.fgMuted, lineHeight: 1.6, marginBottom: 26 }}>
+        A curated catalogue of mobiles and accessories — sourced from authorised distributors, photographed under daylight, and waiting on the shelf.
+      </p>
+
+      {/* Featured tile */}
+      <div className="reveal" style={{
+        ...cs2(cardKind, theme), borderRadius: 22, overflow: 'hidden', marginBottom: 12,
+        position: 'relative',
+      }}>
+        <div style={{ position: 'relative', height: 220 }}>
+          <img src={products[0].img} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" />
+          <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(180deg, transparent 35%, ${theme.bg}f0)` }} />
+          <div style={{ position: 'absolute', top: 14, left: 14, fontFamily: "'JetBrains Mono', monospace", fontSize: 9, color: theme.gold, letterSpacing: '0.25em', padding: '6px 10px', border: `0.5px solid ${theme.gold}`, borderRadius: 999 }}>{products[0].t}</div>
+          <div style={{ position: 'absolute', left: 16, right: 16, bottom: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+            <div>
+              <div style={{ fontFamily: fonts.display, fontSize: 24, color: theme.ivory }}>{products[0].n}</div>
+              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, color: theme.gold, letterSpacing: '0.18em', marginTop: 4 }}>{products[0].sub}</div>
+            </div>
+            <div style={{ width: 40, height: 40, borderRadius: '50%', background: theme.gold, color: theme.navy, display: 'grid', placeItems: 'center' }}>
+              <I2 name="arrow" size={16} />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Two-up tiles */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+        {products.slice(1).map((p, i) => (
+          <div key={p.n} className="reveal" style={{
+            ...cs2(cardKind, theme), borderRadius: 18, overflow: 'hidden', position: 'relative',
+            transitionDelay: `${i * 0.04}s`,
+          }}>
+            <div style={{ height: 110, position: 'relative', overflow: 'hidden' }}>
+              <img src={p.img} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'saturate(0.92)' }} loading="lazy" />
+              <div style={{ position: 'absolute', top: 8, left: 8, fontFamily: "'JetBrains Mono', monospace", fontSize: 7.5, color: theme.gold, letterSpacing: '0.2em', padding: '3px 7px', background: `${theme.bg}cc`, borderRadius: 999 }}>{p.t}</div>
+            </div>
+            <div style={{ padding: '10px 12px 14px' }}>
+              <div style={{ fontFamily: fonts.display, fontSize: 16, color: theme.fg, lineHeight: 1.1 }}>{p.n}</div>
+              <div style={{ fontFamily: fonts.body, fontSize: 11, color: theme.fgMuted, marginTop: 2 }}>{p.sub}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="reveal" style={{ marginTop: 22, textAlign: 'center', fontFamily: "'JetBrains Mono', monospace", fontSize: 10, color: theme.fgMuted, letterSpacing: '0.25em', textTransform: 'uppercase' }}>
+        + the complete ecosystem in stock
+      </div>
+    </section>
+  );
+}
+
+// ─── 03 SERVICES ──────────────────────────────────────────────
+function Services({ theme, fonts, cardKind, intensity }) {
+  const services = [
+    { ic: 'screen',  n: 'Display Repair', d: 'Cracked glass, dead pixels, OLED replacement.', step: '01' },
+    { ic: 'battery', n: 'Battery Replace', d: 'Genuine cells, certified lifecycle, warranty.', step: '02' },
+    { ic: 'water',   n: 'Water Damage',  d: 'Ultrasonic restoration, board-level recovery.', step: '03' },
+    { ic: 'tools',   n: 'A–Z Repairing',  d: 'From chip-off to chassis. Every fault, fixed.', step: '04' },
+    { ic: 'sparkle', n: 'General Service', d: 'Deep clean, port repair, software tune-up.', step: '05' },
+  ];
+  return (
+    <section id="sec-services" data-screen-label="03 Services" style={{ padding: '60px 22px 40px', position: 'relative' }}>
+      <ST eyebrow="03 — Services" title={<>Quietly <span style={{ fontStyle: 'italic', color: theme.gold }}>obsessive</span><br/>repair work.</>} theme={theme} fonts={fonts} />
+      <p className="reveal" style={{ fontFamily: fonts.body, fontSize: 13.5, color: theme.fgMuted, lineHeight: 1.6, marginBottom: 28 }}>
+        Each device passes through a six-stage diagnostic before a single screw turns. Patience is part of the price.
+      </p>
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+        {services.map((s, i) => (
+          <div key={s.n} className="reveal" style={{
+            ...cs2(cardKind, theme), borderRadius: 18, padding: '18px 18px 18px 16px',
+            display: 'flex', alignItems: 'center', gap: 14, position: 'relative', overflow: 'hidden',
+            transitionDelay: `${i * 0.05}s`,
+          }}>
+            {/* step number watermark */}
+            <div style={{
+              position: 'absolute', right: -8, top: -22,
+              fontFamily: fonts.display, fontStyle: 'italic', fontSize: 110, color: theme.fg,
+              opacity: 0.04, letterSpacing: '-0.05em', pointerEvents: 'none', lineHeight: 1,
+            }}>{s.step}</div>
+            <div style={{
+              width: 48, height: 48, borderRadius: 14, flexShrink: 0,
+              background: `linear-gradient(145deg, ${theme.gold}22, transparent)`,
+              border: `0.5px solid ${theme.borderStrong}`,
+              display: 'grid', placeItems: 'center', color: theme.gold,
+              animation: intensity > 60 ? `md-float ${3 + i * 0.2}s ease-in-out infinite` : 'none',
+            }}>
+              <I2 name={s.ic} size={22} stroke={1.3} />
+            </div>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
+                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, color: theme.gold, letterSpacing: '0.2em' }}>{s.step}</div>
+                <div style={{ fontFamily: fonts.display, fontSize: 18, color: theme.fg, lineHeight: 1.1 }}>{s.n}</div>
+              </div>
+              <div style={{ fontFamily: fonts.body, fontSize: 12, color: theme.fgMuted, lineHeight: 1.5, marginTop: 4 }}>{s.d}</div>
+            </div>
+            <div style={{ color: theme.fgDim }}><I2 name="arrow" size={16} stroke={1.2} /></div>
+          </div>
+        ))}
+      </div>
+
+      <div className="reveal" style={{ marginTop: 24, padding: '20px', borderRadius: 18, ...cs2(cardKind, theme), display: 'flex', alignItems: 'center', gap: 14 }}>
+        <div style={{ width: 44, height: 44, borderRadius: 12, background: theme.gold, display: 'grid', placeItems: 'center', color: theme.navy, flexShrink: 0 }}>
+          <I2 name="truck" size={20} stroke={1.4} />
+        </div>
+        <div style={{ flex: 1 }}>
+          <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, color: theme.gold, letterSpacing: '0.22em' }}>COMPLIMENTARY</div>
+          <div style={{ fontFamily: fonts.display, fontSize: 18, color: theme.fg, lineHeight: 1.1, marginTop: 2 }}>Free home pickup & delivery</div>
+          <div style={{ fontFamily: fonts.body, fontSize: 11.5, color: theme.fgMuted, marginTop: 4 }}>On all repairs above ₹1,000 — within Hyderabad.</div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── 04 WHY ───────────────────────────────────────────────────
+function Why({ theme, fonts, cardKind }) {
+  const points = [
+    'Experienced & certified technicians',
+    'Genuine replacement parts',
+    'Fast turnaround times',
+    'Competitive, transparent pricing',
+    'Complete repair tools & consumables',
+    'Service-with-warranty, in writing',
+    'Every smartphone brand supported',
+  ];
+  return (
+    <section id="sec-why" data-screen-label="04 Why" style={{ padding: '60px 22px 40px', position: 'relative' }}>
+      <ST eyebrow="04 — Why us" title={<>The Hyderabad<br/>standard for <span style={{ fontStyle: 'italic', color: theme.gold }}>repair</span>.</>} theme={theme} fonts={fonts} />
+
+      <div className="reveal" style={{
+        ...cs2(cardKind, theme), borderRadius: 22, padding: 22, marginBottom: 18,
+        position: 'relative', overflow: 'hidden',
+      }}>
+        <div style={{
+          position: 'absolute', top: 14, right: 14,
+          fontFamily: fonts.display, fontStyle: 'italic', fontSize: 80, color: theme.gold, opacity: 0.18, lineHeight: 1,
+        }}>"</div>
+        <p style={{
+          fontFamily: fonts.display, fontSize: 19, lineHeight: 1.4, color: theme.fg, fontStyle: 'italic',
+          margin: 0, letterSpacing: '-0.005em',
+        }}>
+          At Mobile Doctor, we're committed to providing the highest quality mobile repair services in Hyderabad. Our experienced technicians use only genuine parts and the latest repair techniques.
+        </p>
+        <div style={{ marginTop: 18, display: 'flex', alignItems: 'center', gap: 10 }}>
+          <div style={{ width: 36, height: 36, borderRadius: '50%', background: theme.gold, color: theme.navy, display: 'grid', placeItems: 'center', fontFamily: fonts.display, fontStyle: 'italic', fontSize: 16 }}>M</div>
+          <div>
+            <div style={{ fontFamily: fonts.body, fontSize: 12, color: theme.fg, fontWeight: 500 }}>The Mobile Doctor Promise</div>
+            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 8.5, color: theme.fgMuted, letterSpacing: '0.18em', textTransform: 'uppercase', marginTop: 2 }}>Hyderabad · Since 2013</div>
+          </div>
+        </div>
+      </div>
+
+      <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 0 }}>
+        {points.map((p, i) => (
+          <li key={p} className="reveal" style={{
+            display: 'flex', alignItems: 'center', gap: 14,
+            padding: '16px 0', borderBottom: `0.5px solid ${theme.border}`,
+            transitionDelay: `${i * 0.04}s`,
+          }}>
+            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, color: theme.gold, letterSpacing: '0.2em', width: 30 }}>0{i + 1}</div>
+            <div style={{ flex: 1, fontFamily: fonts.body, fontSize: 13.5, color: theme.fg, lineHeight: 1.4 }}>{p}</div>
+            <I2 name="check" size={16} stroke={1.4} color={theme.gold} />
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+// ─── 05 BRANDS ────────────────────────────────────────────────
+function Brands({ theme, fonts }) {
+  const brands = ['iPhone', 'Pixel', 'Samsung', 'iQOO', 'Vivo', 'Oppo', 'MI', 'Moto', 'realme'];
+  const row = [...brands, ...brands];
+  return (
+    <section id="sec-brands" data-screen-label="05 Brands" style={{ padding: '60px 0 40px', position: 'relative' }}>
+      <div style={{ padding: '0 22px' }}>
+        <ST eyebrow="05 — Trust" title={<>Every brand,<br/><span style={{ fontStyle: 'italic', color: theme.gold }}>under one roof</span>.</>} theme={theme} fonts={fonts} />
+      </div>
+
+      {/* marquee */}
+      <div className="reveal" style={{ marginTop: 14, overflow: 'hidden', position: 'relative' }}>
+        <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 30, background: `linear-gradient(90deg, ${theme.bg}, transparent)`, zIndex: 2, pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: 30, background: `linear-gradient(-90deg, ${theme.bg}, transparent)`, zIndex: 2, pointerEvents: 'none' }} />
+        <div style={{
+          display: 'flex', gap: 0, whiteSpace: 'nowrap', width: 'max-content',
+          animation: 'md-marquee 30s linear infinite',
+        }}>
+          {row.map((b, i) => (
+            <div key={i} style={{
+              padding: '20px 28px', borderRight: `0.5px solid ${theme.border}`,
+              fontFamily: fonts.display, fontStyle: i % 2 === 0 ? 'italic' : 'normal',
+              fontSize: 26, color: theme.fg, letterSpacing: '-0.01em', display: 'flex', alignItems: 'center', gap: 10,
+            }}>
+              <span style={{ width: 6, height: 6, borderRadius: '50%', background: theme.gold }} />
+              {b}
+            </div>
+          ))}
+        </div>
+      </div>
+      {/* second row reverse */}
+      <div className="reveal" style={{ overflow: 'hidden', position: 'relative', marginTop: 0 }}>
+        <div style={{
+          display: 'flex', gap: 0, whiteSpace: 'nowrap', width: 'max-content',
+          animation: 'md-marquee 38s linear infinite reverse',
+        }}>
+          {row.map((b, i) => (
+            <div key={i} style={{
+              padding: '20px 28px', borderRight: `0.5px solid ${theme.border}`,
+              fontFamily: fonts.display, fontWeight: 300,
+              fontSize: 26, color: theme.fgMuted, letterSpacing: '-0.01em',
+            }}>{b}</div>
+          ))}
+        </div>
+      </div>
+
+      <div style={{ padding: '0 22px', marginTop: 28, fontFamily: fonts.body, fontSize: 13, color: theme.fgMuted, lineHeight: 1.6, textAlign: 'center' }} className="reveal">
+        Authorised parts. Brand-trained hands. Every smartphone deserves the same care.
+      </div>
+    </section>
+  );
+}
+
+// ─── 06 LOCATION ──────────────────────────────────────────────
+function Location({ theme, fonts, cardKind }) {
+  return (
+    <section id="sec-location" data-screen-label="06 Location" style={{ padding: '60px 22px 40px', position: 'relative' }}>
+      <ST eyebrow="06 — Location" title={<>Find the <span style={{ fontStyle: 'italic', color: theme.gold }}>atelier</span>.</>} theme={theme} fonts={fonts} />
+
+      <div className="reveal" style={{ ...cs2(cardKind, theme), borderRadius: 22, overflow: 'hidden' }}>
+        {/* Stylised map grid */}
+        <div style={{
+          position: 'relative', height: 240,
+          background: `linear-gradient(135deg, ${theme.navyMid}, ${theme.navy})`,
+          backgroundImage: `
+            linear-gradient(${theme.border} 0.5px, transparent 0.5px),
+            linear-gradient(90deg, ${theme.border} 0.5px, transparent 0.5px),
+            linear-gradient(135deg, ${theme.navyMid}, ${theme.navy})
+          `,
+          backgroundSize: '24px 24px, 24px 24px, 100% 100%',
+        }}>
+          {/* faux roads */}
+          <svg width="100%" height="100%" viewBox="0 0 360 240" style={{ position: 'absolute', inset: 0 }}>
+            <path d="M-10 80 Q 100 100 180 90 T 380 130" stroke={theme.gold} strokeOpacity="0.3" strokeWidth="1.2" fill="none" />
+            <path d="M40 -10 Q 80 80 100 130 T 140 260" stroke={theme.gold} strokeOpacity="0.2" strokeWidth="1" fill="none" />
+            <path d="M-10 180 Q 120 160 220 170 T 380 200" stroke={theme.gold} strokeOpacity="0.25" strokeWidth="1" fill="none" />
+            <path d="M260 -10 Q 240 80 250 130 T 280 260" stroke={theme.gold} strokeOpacity="0.18" strokeWidth="1" fill="none" />
+          </svg>
+          {/* pin */}
+          <div style={{ position: 'absolute', left: '50%', top: '48%', transform: 'translate(-50%,-50%)' }}>
+            <div style={{
+              position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%,-50%)',
+              width: 80, height: 80, borderRadius: '50%', border: `1px solid ${theme.gold}`,
+              animation: 'md-pulse-ring 2.4s ease-out infinite',
+            }} />
+            <div style={{
+              position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%,-50%)',
+              width: 80, height: 80, borderRadius: '50%', border: `1px solid ${theme.gold}`,
+              animation: 'md-pulse-ring 2.4s ease-out 1.2s infinite',
+            }} />
+            <div style={{
+              width: 36, height: 36, borderRadius: '50%',
+              background: theme.gold, color: theme.navy,
+              display: 'grid', placeItems: 'center',
+              boxShadow: `0 8px 20px -4px ${theme.gold}`,
+              position: 'relative', zIndex: 2,
+            }}>
+              <I2 name="pin" size={18} stroke={1.6} />
+            </div>
+          </div>
+          {/* corner coords */}
+          <div style={{ position: 'absolute', top: 12, left: 14, fontFamily: "'JetBrains Mono', monospace", fontSize: 8.5, color: theme.gold, letterSpacing: '0.2em' }}>17.5544° N</div>
+          <div style={{ position: 'absolute', top: 12, right: 14, fontFamily: "'JetBrains Mono', monospace", fontSize: 8.5, color: theme.gold, letterSpacing: '0.2em' }}>78.4905° E</div>
+          <div style={{ position: 'absolute', bottom: 12, left: 14, fontFamily: "'JetBrains Mono', monospace", fontSize: 8.5, color: theme.fgMuted, letterSpacing: '0.2em' }}>HYD · KOMPALLY</div>
+        </div>
+        <div style={{ padding: '20px' }}>
+          <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, color: theme.gold, letterSpacing: '0.22em' }}>VISIT THE STUDIO</div>
+          <div style={{ fontFamily: fonts.display, fontSize: 22, color: theme.fg, lineHeight: 1.2, marginTop: 8 }}>Under Kompally Bridge</div>
+          <div style={{ fontFamily: fonts.body, fontSize: 13, color: theme.fgMuted, lineHeight: 1.55, marginTop: 6 }}>
+            via Gundlapochampally Village,<br/>Hyderabad, Telangana
+          </div>
+          <div style={{ display: 'flex', gap: 10, marginTop: 16 }}>
+            <button style={{
+              flex: 1, height: 44, border: `0.5px solid ${theme.borderStrong}`, background: 'transparent',
+              color: theme.fg, borderRadius: 12, fontFamily: fonts.body, fontWeight: 500, fontSize: 11.5,
+              letterSpacing: '0.1em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+            }}>
+              <I2 name="arrow" size={14} /> Directions
+            </button>
+            <button style={{
+              flex: 1, height: 44, border: 'none', background: theme.gold, color: theme.navy,
+              borderRadius: 12, fontFamily: fonts.body, fontWeight: 600, fontSize: 11.5,
+              letterSpacing: '0.1em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+            }}>
+              <I2 name="phone" size={14} stroke={1.6} /> Call now
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Hours strip */}
+      <div className="reveal" style={{ marginTop: 14, ...cs2(cardKind, theme), borderRadius: 16, padding: '14px 18px', display: 'flex', alignItems: 'center', gap: 12 }}>
+        <I2 name="clock" size={18} color={theme.gold} stroke={1.4} />
+        <div style={{ flex: 1 }}>
+          <div style={{ fontFamily: fonts.body, fontSize: 12, color: theme.fg }}>Open today · 10:00 — 21:00</div>
+          <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, color: theme.fgMuted, letterSpacing: '0.18em', textTransform: 'uppercase', marginTop: 2 }}>Mon — Sun · Walk-ins welcome</div>
+        </div>
+        <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#67e09b', boxShadow: '0 0 12px #67e09b' }} />
+      </div>
+    </section>
+  );
+}
+
+// ─── 07 CONTACT ───────────────────────────────────────────────
+function Contact({ theme, fonts, cardKind }) {
+  return (
+    <section id="sec-contact" data-screen-label="07 Contact" style={{ padding: '60px 22px 40px', position: 'relative' }}>
+      <ST eyebrow="07 — Contact" title={<>Speak to the <span style={{ fontStyle: 'italic', color: theme.gold }}>Doctor</span>.</>} theme={theme} fonts={fonts} />
+
+      <div className="reveal" style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+        {[
+          { ic: 'phone', l: 'Call', v: '+91 80084 04707', v2: '+91 98497 98969' },
+          { ic: 'whats', l: 'WhatsApp', v: '+91 98497 98969' },
+          { ic: 'mail',  l: 'Email', v: 'mobiledoctor@gmail.com' },
+        ].map((c, i) => (
+          <div key={c.l} className="reveal" style={{
+            ...cs2(cardKind, theme), borderRadius: 16, padding: '16px 18px',
+            display: 'flex', alignItems: 'center', gap: 14,
+            transitionDelay: `${i * 0.05}s`,
+          }}>
+            <div style={{
+              width: 42, height: 42, borderRadius: 12,
+              background: `linear-gradient(145deg, ${theme.gold}33, transparent)`,
+              border: `0.5px solid ${theme.borderStrong}`, color: theme.gold,
+              display: 'grid', placeItems: 'center', flexShrink: 0,
+            }}>
+              <I2 name={c.ic} size={18} stroke={1.4} />
+            </div>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, color: theme.fgMuted, letterSpacing: '0.22em', textTransform: 'uppercase' }}>{c.l}</div>
+              <div style={{ fontFamily: fonts.body, fontSize: 14, color: theme.fg, marginTop: 3, fontWeight: 500 }}>{c.v}</div>
+              {c.v2 && <div style={{ fontFamily: fonts.body, fontSize: 13, color: theme.fgMuted, marginTop: 2 }}>{c.v2}</div>}
+            </div>
+            <I2 name="arrow" size={16} color={theme.fgDim} stroke={1.2} />
+          </div>
+        ))}
+      </div>
+
+      {/* Closing card */}
+      <div className="reveal" style={{
+        marginTop: 22, padding: '28px 22px',
+        background: `linear-gradient(145deg, ${theme.gold}, ${theme.goldDeep})`,
+        borderRadius: 22, color: theme.navy, position: 'relative', overflow: 'hidden',
+      }}>
+        <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, letterSpacing: '0.25em', opacity: 0.7 }}>—— THE PROMISE</div>
+        <div style={{ fontFamily: fonts.display, fontStyle: 'italic', fontSize: 32, lineHeight: 1, marginTop: 12 }}>
+          Don't delay—<br/>repair it today.
+        </div>
+        <div style={{ marginTop: 18, fontFamily: fonts.body, fontSize: 12.5, opacity: 0.85, lineHeight: 1.5 }}>
+          We answer every call before it rings out. Drop in, dial in, or have us pick it up.
+        </div>
+        <div style={{ marginTop: 20, display: 'flex', alignItems: 'center', gap: 10 }}>
+          <button style={{
+            height: 44, padding: '0 20px', border: 'none', background: theme.navy, color: theme.gold,
+            borderRadius: 12, fontFamily: fonts.body, fontWeight: 600, fontSize: 11.5,
+            letterSpacing: '0.12em', textTransform: 'uppercase',
+          }}>Book Pickup</button>
+          <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, letterSpacing: '0.2em', opacity: 0.7 }}>FREE · ABOVE ₹1,000</div>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <div className="reveal" style={{ marginTop: 36, paddingTop: 24, borderTop: `0.5px solid ${theme.border}` }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div style={{ fontFamily: fonts.display, fontStyle: 'italic', fontSize: 16, color: theme.fg }}>Mobile Doctor</div>
+          <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 8.5, color: theme.fgMuted, letterSpacing: '0.22em' }}>EST. 2013</div>
+        </div>
+        <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 8.5, color: theme.fgDim, letterSpacing: '0.18em', textTransform: 'uppercase', marginTop: 14, lineHeight: 1.7 }}>
+          © 2026 Mobile Doctor · Hyderabad<br/>
+          Crafted with patience.
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── BOTTOM NAV (sticky) ──────────────────────────────────────
+function BottomNav({ theme, fonts, scrollRef, progress }) {
+  const items = [
+    { id: 'sec-sales', l: 'Shop', ic: 'case' },
+    { id: 'sec-services', l: 'Service', ic: 'tools' },
+    { id: 'sec-why', l: 'Trust', ic: 'shield' },
+    { id: 'sec-location', l: 'Visit', ic: 'pin' },
+    { id: 'sec-contact', l: 'Call', ic: 'phone' },
+  ];
+  const go = (id) => {
+    const root = scrollRef.current;
+    const el = root && root.querySelector('#' + id);
+    if (el && root) root.scrollTo({ top: el.offsetTop - 12, behavior: 'smooth' });
+  };
+  return (
+    <div style={{
+      position: 'absolute', left: 12, right: 12, bottom: 26, zIndex: 30,
+      borderRadius: 22, padding: '8px 6px',
+      background: `${theme.bg}cc`,
+      backdropFilter: 'blur(28px) saturate(160%)',
+      WebkitBackdropFilter: 'blur(28px) saturate(160%)',
+      border: `0.5px solid ${theme.borderStrong}`,
+      boxShadow: `0 20px 50px -10px rgba(0,0,0,0.6), inset 0 1px 0 ${theme.border}`,
+      display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+    }}>
+      {/* progress indicator */}
+      <div style={{
+        position: 'absolute', left: 12, right: 12, top: 4, height: 1,
+        background: theme.border, borderRadius: 1, overflow: 'hidden',
+      }}>
+        <div style={{
+          width: `${progress * 100}%`, height: '100%',
+          background: `linear-gradient(90deg, ${theme.gold}, ${theme.goldDeep})`,
+          transition: 'width 0.2s ease-out',
+        }} />
+      </div>
+      {items.map(it => (
+        <button key={it.id} onClick={() => go(it.id)} style={{
+          flex: 1, height: 48, background: 'transparent', border: 'none', cursor: 'pointer',
+          display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 3,
+          color: theme.fg, padding: 0,
+        }}>
+          <I2 name={it.ic} size={17} stroke={1.4} />
+          <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 7.5, color: theme.fgMuted, letterSpacing: '0.18em', textTransform: 'uppercase' }}>{it.l}</div>
+        </button>
+      ))}
+    </div>
+  );
+}
+
+// ─── Free delivery floating ribbon ────────────────────────────
+function DeliveryRibbon({ theme, fonts }) {
+  return (
+    <div style={{
+      position: 'absolute', top: 64, left: 12, right: 12, zIndex: 25,
+      borderRadius: 999, padding: '8px 14px',
+      background: `${theme.bg}d8`,
+      backdropFilter: 'blur(20px)',
+      WebkitBackdropFilter: 'blur(20px)',
+      border: `0.5px solid ${theme.borderStrong}`,
+      display: 'flex', alignItems: 'center', gap: 10,
+      boxShadow: `0 10px 30px -10px rgba(0,0,0,0.5)`,
+    }}>
+      <div style={{ width: 26, height: 26, borderRadius: '50%', background: theme.gold, color: theme.navy, display: 'grid', placeItems: 'center' }}>
+        <I2 name="truck" size={13} stroke={1.6} />
+      </div>
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <div style={{ fontFamily: fonts.body, fontSize: 11, color: theme.fg, fontWeight: 500, lineHeight: 1.1 }}>Free home delivery</div>
+        <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 8, color: theme.gold, letterSpacing: '0.18em', textTransform: 'uppercase', marginTop: 2 }}>Bills above ₹1,000</div>
+      </div>
+      <I2 name="arrow" size={13} color={theme.fg} stroke={1.4} />
+    </div>
+  );
+}
+
+Object.assign(window.MDS, {
+  Sales, Services, Why, Brands, Location, Contact, BottomNav, DeliveryRibbon,
+});
