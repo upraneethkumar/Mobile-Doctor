@@ -90,6 +90,7 @@ function MobileSite({ tweaks, setTweak, onBook }) {
           fonts={fonts}
           cardKind={tweaks.cardKind}
           intensity={tweaks.animation}
+          onBook={onBook}
         />
         <window.MDS.Why
           theme={theme}
@@ -670,7 +671,7 @@ function DesktopSales({ theme, fonts, cardKind, isTablet }) {
 
 // ─── Desktop Services ──────────────────────────────────────────────────────────
 
-function DesktopServices({ theme, fonts, cardKind, isTablet }) {
+function DesktopServices({ theme, fonts, cardKind, isTablet, onBook }) {
   const hPad = isTablet ? 48 : 80;
   const services = [
     {
@@ -743,10 +744,12 @@ function DesktopServices({ theme, fonts, cardKind, isTablet }) {
         {services.map((s, i) => (
           <div
             key={s.n}
+            onClick={onBook}
             style={{
               ...window.MD.cardStyle(cardKind, theme),
               borderRadius: 22,
               padding: 30,
+              cursor: "pointer",
             }}
           >
             <div
@@ -1864,6 +1867,7 @@ function DesktopLayout({ tweaks, setTweak, onBook }) {
           fonts={fonts}
           cardKind={tweaks.cardKind}
           isTablet={isTablet}
+          onBook={onBook}
         />
         <DesktopWhy
           theme={theme}

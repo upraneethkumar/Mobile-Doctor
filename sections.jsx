@@ -290,6 +290,7 @@ function HeroEditorial({ theme, fonts, intensity, dark, onToggleDark, onBook }) 
           Book a Repair
         </button>
         <button
+          onClick={() => { window.location.href = "tel:+918008404707"; }}
           style={{
             width: 52,
             height: 52,

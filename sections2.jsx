@@ -427,7 +427,7 @@ function Sales({ theme, fonts, cardKind }) {
 }
 
 // ─── 03 SERVICES ──────────────────────────────────────────────
-function Services({ theme, fonts, cardKind, intensity }) {
+function Services({ theme, fonts, cardKind, intensity, onBook }) {
   const services = [
     {
       ic: "screen",
@@ -500,6 +500,7 @@ function Services({ theme, fonts, cardKind, intensity }) {
           <div
             key={s.n}
             className="reveal"
+            onClick={onBook}
             style={{
               ...cs2(cardKind, theme),
               borderRadius: 18,
@@ -510,6 +511,7 @@ function Services({ theme, fonts, cardKind, intensity }) {
               position: "relative",
               overflow: "hidden",
               transitionDelay: `${i * 0.05}s`,
+              cursor: "pointer",
             }}
           >
             {/* step number watermark */}
@@ -1229,10 +1231,12 @@ function Location({ theme, fonts, cardKind }) {
               <I2 name="arrow" size={14} /> Directions
             </button>
             <button
+              onClick={() => { window.location.href = "tel:+918008404707"; }}
               style={{
                 flex: 1,
                 height: 44,
                 border: "none",
+                cursor: "pointer",
                 background: theme.gold,
                 color: theme.navy,
                 borderRadius: 12,
@@ -1328,17 +1332,17 @@ function Contact({ theme, fonts, cardKind, onBook }) {
         style={{ display: "flex", flexDirection: "column", gap: 12 }}
       >
         {[
-          {
-            ic: "phone",
-            l: "Call",
-            v: "+91 80084 04707",
-          },
-          { ic: "whats", l: "WhatsApp", v: "+91 98497 98969" },
-          { ic: "mail", l: "Email", v: "mobiledoctor@gmail.com" },
+          { ic: "phone", l: "Call",      v: "+91 80084 04707",       href: "tel:+918008404707" },
+          { ic: "whats", l: "WhatsApp",  v: "+91 98497 98969",       href: "https://wa.me/919849798969" },
+          { ic: "mail",  l: "Email",     v: "mobiledoctor@gmail.com",href: "mailto:mobiledoctor@gmail.com" },
         ].map((c, i) => (
           <div
             key={c.l}
             className="reveal"
+            onClick={() => {
+              if (c.href.startsWith("http")) window.open(c.href, "_blank", "noopener");
+              else window.location.href = c.href;
+            }}
             style={{
               ...cs2(cardKind, theme),
               borderRadius: 16,
@@ -1347,6 +1351,7 @@ function Contact({ theme, fonts, cardKind, onBook }) {
               alignItems: "center",
               gap: 14,
               transitionDelay: `${i * 0.05}s`,
+              cursor: "pointer",
             }}
           >
             <div
