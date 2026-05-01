@@ -231,9 +231,9 @@ function HeroEditorial({ theme, fonts, intensity, dark, onToggleDark }) {
         }}
       >
         {[
-          ["12+", "Years"],
-          ["18k+", "Repairs"],
-          ["9", "Brands"],
+          ["20+", "Years"],
+          ["25k+", "Repairs"],
+          ["15+", "Brands"],
         ].map(([n, l]) => (
           <div
             key={l}
