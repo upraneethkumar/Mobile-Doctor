@@ -428,9 +428,9 @@ function DesktopHero({ theme, fonts, intensity, isTablet }) {
           </div>
           <div style={{ marginTop: 40, display: "flex", gap: 28 }}>
             {[
-              ["12+", "Years"],
-              ["18k+", "Repairs"],
-              ["9", "Brands"],
+              ["20+", "Years"],
+              ["25k+", "Repairs"],
+              ["15+", "Brands"],
               ["24h", "Turnaround"],
             ].map(([n, l]) => (
               <div key={l}>

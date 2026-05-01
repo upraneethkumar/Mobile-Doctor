@@ -655,11 +655,17 @@ function Brands({ theme, fonts }) {
     "Pixel",
     "Samsung",
     "iQOO",
+    "OnePlus",
+    "Asus",
     "Vivo",
     "Oppo",
     "MI",
-    "Moto",
+    "Motorola",
     "realme",
+    "Redme",
+    "POCO",
+    "Xiaomi",
+    "Nothing",
   ];
   const row = [...brands, ...brands];
   return (
@@ -1140,7 +1146,6 @@ function Contact({ theme, fonts, cardKind }) {
             ic: "phone",
             l: "Call",
             v: "+91 80084 04707",
-            v2: "+91 98497 98969",
           },
           { ic: "whats", l: "WhatsApp", v: "+91 98497 98969" },
           { ic: "mail", l: "Email", v: "mobiledoctor@gmail.com" },
@@ -1248,7 +1253,7 @@ function Contact({ theme, fonts, cardKind }) {
         >
           Don't delay—
           <br />
-          repair it today.
+          Repair today.
         </div>
         <div
           style={{
@@ -1334,7 +1339,7 @@ function Contact({ theme, fonts, cardKind }) {
               letterSpacing: "0.22em",
             }}
           >
-            EST. 2013
+            EST. 2012
           </div>
         </div>
         <div
