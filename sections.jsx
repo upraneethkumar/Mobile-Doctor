@@ -59,7 +59,14 @@ function SectionTitle({ eyebrow, title, theme, fonts, align = "left" }) {
 }
 
 // ─── HERO variants ────────────────────────────────────────────
-function HeroEditorial({ theme, fonts, intensity, dark, onToggleDark, onBook }) {
+function HeroEditorial({
+  theme,
+  fonts,
+  intensity,
+  dark,
+  onToggleDark,
+  onBook,
+}) {
   return (
     <section
       data-screen-label="01 Hero"
@@ -290,7 +297,9 @@ function HeroEditorial({ theme, fonts, intensity, dark, onToggleDark, onBook }) 
           Book a Repair
         </button>
         <button
-          onClick={() => { window.location.href = "tel:+918008404707"; }}
+          onClick={() => {
+            window.location.href = "tel:+919849798969";
+          }}
           style={{
             width: 52,
             height: 52,
