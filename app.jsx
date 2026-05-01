@@ -42,7 +42,6 @@ function MobileSite({ tweaks, setTweak }) {
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%', background: theme.bg, overflow: 'hidden' }}>
-      <window.MDS.DeliveryRibbon theme={theme} fonts={fonts} />
       <div ref={scrollRef} className="md-scroll no-scrollbar" style={{
         width: '100%', height: '100%', overflowY: 'auto', overflowX: 'hidden',
         background: theme.bgGrad,
@@ -159,7 +158,7 @@ function DesktopHero({ theme, fonts, intensity, isTablet }) {
             fontSize: isTablet ? 64 : 84, lineHeight: 1.02, letterSpacing: '-0.03em', margin: '24px 0 0',
           }}>
             Don't <span style={{ fontStyle: 'italic', color: theme.gold }}>delay</span>—repair<br/>
-            it <span style={{ fontStyle: 'italic', fontWeight: 500, background: `linear-gradient(90deg, ${theme.gold}, ${theme.goldDeep}, ${theme.gold})`, WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent', backgroundSize: '200% 100%', animation: intensity > 30 ? 'md-shimmer 4s linear infinite' : 'none' }}>today.</span>
+            <span style={{ fontStyle: 'italic', fontWeight: 500, color: theme.gold }}>today.</span>
           </h1>
           <p style={{ fontFamily: fonts.body, fontSize: 17, color: theme.fgMuted, lineHeight: 1.6, marginTop: 28, maxWidth: 420 }}>
             Hyderabad's quietly obsessive mobile repair atelier. Genuine parts, certified hands, an unhurried pace, and a warranty that means something.
