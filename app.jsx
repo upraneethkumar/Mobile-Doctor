@@ -35,7 +35,7 @@ function useViewport() {
 
 // ─── Mobile root (full-viewport, no frame) ────────────────────────────────────
 
-function MobileSite({ tweaks, setTweak }) {
+function MobileSite({ tweaks, setTweak, onBook }) {
   const theme = TH[tweaks.dark ? "dark" : "light"];
   const fonts = FP[tweaks.fontPair] || FP.classical;
   const scrollRef = aR(null);
@@ -78,6 +78,7 @@ function MobileSite({ tweaks, setTweak }) {
           intensity={tweaks.animation}
           dark={tweaks.dark}
           onToggleDark={() => setTweak("dark", !tweaks.dark)}
+          onBook={onBook}
         />
         <window.MDS.Sales
           theme={theme}
@@ -105,6 +106,7 @@ function MobileSite({ tweaks, setTweak }) {
           theme={theme}
           fonts={fonts}
           cardKind={tweaks.cardKind}
+          onBook={onBook}
         />
       </div>
       <window.MDS.BottomNav
@@ -117,7 +119,7 @@ function MobileSite({ tweaks, setTweak }) {
   );
 }
 
-function MobileRoot({ tweaks, setTweak }) {
+function MobileRoot({ tweaks, setTweak, onBook }) {
   return (
     <div
       style={{
@@ -127,14 +129,14 @@ function MobileRoot({ tweaks, setTweak }) {
         overflow: "hidden",
       }}
     >
-      <MobileSite tweaks={tweaks} setTweak={setTweak} />
+      <MobileSite tweaks={tweaks} setTweak={setTweak} onBook={onBook} />
     </div>
   );
 }
 
 // ─── Desktop sticky header ────────────────────────────────────────────────────
 
-function DesktopStickyHeader({ theme, fonts, dark, isDesktop, onToggleDark }) {
+function DesktopStickyHeader({ theme, fonts, dark, isDesktop, onToggleDark, onBook }) {
   const hPad = isDesktop ? 80 : 48;
   return (
     <header
@@ -264,6 +266,7 @@ function DesktopStickyHeader({ theme, fonts, dark, isDesktop, onToggleDark }) {
             <AI name={dark ? "sun" : "moon"} size={18} stroke={1.4} />
           </button>
           <button
+            onClick={onBook}
             style={{
               height: 44,
               padding: "0 22px",
@@ -290,7 +293,7 @@ function DesktopStickyHeader({ theme, fonts, dark, isDesktop, onToggleDark }) {
 
 // ─── Desktop Hero ─────────────────────────────────────────────────────────────
 
-function DesktopHero({ theme, fonts, intensity, isTablet }) {
+function DesktopHero({ theme, fonts, intensity, isTablet, onBook }) {
   const hPad = isTablet ? 48 : 80;
   return (
     <div
@@ -386,6 +389,7 @@ function DesktopHero({ theme, fonts, intensity, isTablet }) {
           </p>
           <div style={{ display: "flex", gap: 14, marginTop: 36 }}>
             <button
+              onClick={onBook}
               style={{
                 height: 56,
                 padding: "0 28px",
@@ -1452,7 +1456,7 @@ function DesktopLocation({ theme, fonts, cardKind, isTablet }) {
 
 // ─── Desktop Contact (NEW) ─────────────────────────────────────────────────────
 
-function DesktopContact({ theme, fonts, cardKind, isTablet }) {
+function DesktopContact({ theme, fonts, cardKind, isTablet, onBook }) {
   const hPad = isTablet ? 48 : 80;
   const contacts = [
     { ic: "phone", l: "Call", v: "+91 80084 04707" },
@@ -1657,6 +1661,7 @@ function DesktopContact({ theme, fonts, cardKind, isTablet }) {
           }}
         >
           <button
+            onClick={onBook}
             style={{
               height: 56,
               padding: "0 28px",
@@ -1823,7 +1828,7 @@ function DesktopFooter({ theme, fonts, isTablet }) {
 
 // ─── Desktop layout (composes all desktop sections) ───────────────────────────
 
-function DesktopLayout({ tweaks, setTweak }) {
+function DesktopLayout({ tweaks, setTweak, onBook }) {
   const { isTablet, isDesktop } = useViewport();
   const theme = TH[tweaks.dark ? "dark" : "light"];
   const fonts = FP[tweaks.fontPair] || FP.classical;
@@ -1838,6 +1843,7 @@ function DesktopLayout({ tweaks, setTweak }) {
         dark={tweaks.dark}
         isDesktop={isDesktop}
         onToggleDark={() => setTweak("dark", !tweaks.dark)}
+        onBook={onBook}
       />
       <main>
         <DesktopHero
@@ -1845,6 +1851,7 @@ function DesktopLayout({ tweaks, setTweak }) {
           fonts={fonts}
           intensity={tweaks.animation}
           isTablet={isTablet}
+          onBook={onBook}
         />
         <DesktopSales
           theme={theme}
@@ -1876,6 +1883,7 @@ function DesktopLayout({ tweaks, setTweak }) {
           fonts={fonts}
           cardKind={tweaks.cardKind}
           isTablet={isTablet}
+          onBook={onBook}
         />
         <DesktopFooter theme={theme} fonts={fonts} isTablet={isTablet} />
       </main>
@@ -1888,9 +1896,22 @@ function DesktopLayout({ tweaks, setTweak }) {
 function App() {
   const [tweaks, setTweak] = useTweaks(TWEAK_DEFAULTS);
   const { isMobile } = useViewport();
+  const [bookOpen, setBookOpen] = aS(false);
+  const onBook = () => setBookOpen(true);
 
-  if (isMobile) return <MobileRoot tweaks={tweaks} setTweak={setTweak} />;
-  return <DesktopLayout tweaks={tweaks} setTweak={setTweak} />;
+  const modal = (
+    <window.MDS.BookingModal
+      theme={TH[tweaks.dark ? "dark" : "light"]}
+      fonts={FP[tweaks.fontPair] || FP.editorial}
+      isMobile={isMobile}
+      dark={tweaks.dark}
+      open={bookOpen}
+      onClose={() => setBookOpen(false)}
+    />
+  );
+
+  if (isMobile) return <React.Fragment>{modal}<MobileRoot tweaks={tweaks} setTweak={setTweak} onBook={onBook} /></React.Fragment>;
+  return <React.Fragment>{modal}<DesktopLayout tweaks={tweaks} setTweak={setTweak} onBook={onBook} /></React.Fragment>;
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(<App />);

@@ -59,7 +59,7 @@ function SectionTitle({ eyebrow, title, theme, fonts, align = "left" }) {
 }
 
 // ─── HERO variants ────────────────────────────────────────────
-function HeroEditorial({ theme, fonts, intensity, dark, onToggleDark }) {
+function HeroEditorial({ theme, fonts, intensity, dark, onToggleDark, onBook }) {
   return (
     <section
       data-screen-label="01 Hero"
@@ -285,6 +285,7 @@ function HeroEditorial({ theme, fonts, intensity, dark, onToggleDark }) {
             position: "relative",
             overflow: "hidden",
           }}
+          onClick={onBook}
         >
           Book a Repair
         </button>
@@ -422,7 +423,7 @@ function HeroEditorial({ theme, fonts, intensity, dark, onToggleDark }) {
   );
 }
 
-function HeroSplit({ theme, fonts, intensity, dark, onToggleDark }) {
+function HeroSplit({ theme, fonts, intensity, dark, onToggleDark, onBook }) {
   return (
     <section
       data-screen-label="01 Hero"
@@ -528,10 +529,12 @@ function HeroSplit({ theme, fonts, intensity, dark, onToggleDark }) {
       </div>
       <div style={{ marginTop: 28, display: "flex", gap: 10 }}>
         <button
+          onClick={onBook}
           style={{
             flex: 1,
             height: 52,
             border: "none",
+            cursor: "pointer",
             background: theme.gold,
             color: theme.navy,
             borderRadius: 14,
@@ -566,7 +569,7 @@ function HeroSplit({ theme, fonts, intensity, dark, onToggleDark }) {
   );
 }
 
-function HeroNumbers({ theme, fonts, intensity, dark, onToggleDark }) {
+function HeroNumbers({ theme, fonts, intensity, dark, onToggleDark, onBook }) {
   return (
     <section
       data-screen-label="01 Hero"
@@ -652,10 +655,12 @@ function HeroNumbers({ theme, fonts, intensity, dark, onToggleDark }) {
       </p>
       <div style={{ display: "flex", gap: 10 }}>
         <button
+          onClick={onBook}
           style={{
             flex: 1,
             height: 52,
             border: "none",
+            cursor: "pointer",
             background: theme.gold,
             color: theme.navy,
             borderRadius: 14,
