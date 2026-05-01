@@ -64,7 +64,7 @@ function HeroEditorial({ theme, fonts, intensity, dark, onToggleDark }) {
     <section
       data-screen-label="01 Hero"
       style={{
-        padding: "72px 22px 28px",
+        padding: "20px 22px 20px",
         position: "relative",
         overflow: "hidden",
       }}
@@ -90,7 +90,7 @@ function HeroEditorial({ theme, fonts, intensity, dark, onToggleDark }) {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          marginBottom: 56,
+          marginBottom: 20,
           position: "relative",
           zIndex: 2,
         }}
@@ -178,30 +178,22 @@ function HeroEditorial({ theme, fonts, intensity, dark, onToggleDark }) {
             fontFamily: fonts.display,
             fontWeight: 400,
             color: theme.fg,
-            fontSize: 64,
+            fontSize: 60,
             lineHeight: 0.96,
             letterSpacing: "-0.025em",
             margin: "20px 0 0",
           }}
         >
-          Don't
-          <br />
+          Don't{" "}
           <span
             style={{ fontStyle: "italic", color: theme.gold, fontWeight: 300 }}
           >
             delay
           </span>{" "}
-          — <br />
-          Repair
-          <br />
-          <span
-            style={{
-              color: theme.gold,
-              fontWeight: 500,
-            }}
-          >
-            today.
-          </span>
+          —
+          <br /> {/* This moves Repair to the next line */}
+          Repair{" "}
+          <span style={{ color: theme.gold, fontWeight: 500 }}>today</span>
         </h1>
         <p
           style={{
