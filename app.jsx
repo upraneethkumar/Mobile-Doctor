@@ -137,7 +137,14 @@ function MobileRoot({ tweaks, setTweak, onBook }) {
 
 // ─── Desktop sticky header ────────────────────────────────────────────────────
 
-function DesktopStickyHeader({ theme, fonts, dark, isDesktop, onToggleDark, onBook }) {
+function DesktopStickyHeader({
+  theme,
+  fonts,
+  dark,
+  isDesktop,
+  onToggleDark,
+  onBook,
+}) {
   const hPad = isDesktop ? 80 : 48;
   return (
     <header
@@ -1462,8 +1469,8 @@ function DesktopLocation({ theme, fonts, cardKind, isTablet }) {
 function DesktopContact({ theme, fonts, cardKind, isTablet, onBook }) {
   const hPad = isTablet ? 48 : 80;
   const contacts = [
-    { ic: "phone", l: "Call", v: "+91 80084 04707" },
-    { ic: "whats", l: "WhatsApp", v: "+91 98497 98969" },
+    { ic: "phone", l: "Call", v: "+91 98497 98969" },
+    { ic: "whats", l: "WhatsApp", v: "+91 80084 04707" },
     { ic: "mail", l: "Email", v: "mobiledoctor@gmail.com" },
   ];
   return (
@@ -1914,8 +1921,19 @@ function App() {
     />
   );
 
-  if (isMobile) return <React.Fragment>{modal}<MobileRoot tweaks={tweaks} setTweak={setTweak} onBook={onBook} /></React.Fragment>;
-  return <React.Fragment>{modal}<DesktopLayout tweaks={tweaks} setTweak={setTweak} onBook={onBook} /></React.Fragment>;
+  if (isMobile)
+    return (
+      <React.Fragment>
+        {modal}
+        <MobileRoot tweaks={tweaks} setTweak={setTweak} onBook={onBook} />
+      </React.Fragment>
+    );
+  return (
+    <React.Fragment>
+      {modal}
+      <DesktopLayout tweaks={tweaks} setTweak={setTweak} onBook={onBook} />
+    </React.Fragment>
+  );
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(<App />);

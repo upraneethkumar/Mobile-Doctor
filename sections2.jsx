@@ -5,7 +5,13 @@ const { Eyebrow: Eb, GoldRule: GR, SectionTitle: ST } = window.MDS;
 
 // ─── BOOKING MODAL ────────────────────────────────────────────
 function BookingModal({ theme, fonts, isMobile, dark, open, onClose }) {
-  const [form, setForm] = React.useState({ name: "", phone: "", brand: "", issue: "", note: "" });
+  const [form, setForm] = React.useState({
+    name: "",
+    phone: "",
+    brand: "",
+    issue: "",
+    note: "",
+  });
   const [errors, setErrors] = React.useState({});
   const [submitted, setSubmitted] = React.useState(false);
   const modalRef = React.useRef(null);
@@ -13,9 +19,13 @@ function BookingModal({ theme, fonts, isMobile, dark, open, onClose }) {
   React.useEffect(() => {
     if (!open) return;
     document.body.style.overflow = "hidden";
-    const first = modalRef.current && modalRef.current.querySelector("input, select, textarea");
+    const first =
+      modalRef.current &&
+      modalRef.current.querySelector("input, select, textarea");
     if (first) first.focus();
-    const onKey = (e) => { if (e.key === "Escape") onClose(); };
+    const onKey = (e) => {
+      if (e.key === "Escape") onClose();
+    };
     document.addEventListener("keydown", onKey);
     return () => {
       document.removeEventListener("keydown", onKey);
@@ -30,7 +40,8 @@ function BookingModal({ theme, fonts, isMobile, dark, open, onClose }) {
   const validate = () => {
     const e = {};
     if (!form.name.trim()) e.name = "Name is required";
-    if (!/^[6-9]\d{9}$/.test(form.phone.trim())) e.phone = "Enter a valid 10-digit mobile number";
+    if (!/^[6-9]\d{9}$/.test(form.phone.trim()))
+      e.phone = "Enter a valid 10-digit mobile number";
     if (!form.brand) e.brand = "Select your device brand";
     if (!form.issue) e.issue = "Select the issue type";
     return e;
@@ -38,7 +49,10 @@ function BookingModal({ theme, fonts, isMobile, dark, open, onClose }) {
 
   const submit = () => {
     const e = validate();
-    if (Object.keys(e).length) { setErrors(e); return; }
+    if (Object.keys(e).length) {
+      setErrors(e);
+      return;
+    }
     setErrors({});
     const parts = [
       "Hi, I'd like to book a repair at Mobile Doctor.",
@@ -48,7 +62,11 @@ function BookingModal({ theme, fonts, isMobile, dark, open, onClose }) {
       "Issue: " + form.issue,
     ];
     if (form.note.trim()) parts.push("Note: " + form.note.trim());
-    window.open("https://wa.me/919849798969?text=" + encodeURIComponent(parts.join("\n")), "_blank", "noopener");
+    window.open(
+      "https://wa.me/919849798969?text=" + encodeURIComponent(parts.join("\n")),
+      "_blank",
+      "noopener",
+    );
     setSubmitted(true);
     setTimeout(() => {
       setSubmitted(false);
@@ -81,52 +99,156 @@ function BookingModal({ theme, fonts, isMobile, dark, open, onClose }) {
     textTransform: "uppercase",
     marginTop: 16,
   };
-  const err = { fontFamily: "'JetBrains Mono', monospace", fontSize: 9, color: "#e05a5a", letterSpacing: "0.08em", marginTop: 4 };
-
-  const sheet = isMobile ? {
-    position: "fixed", left: 0, right: 0, bottom: 0,
-    maxHeight: "92vh", borderRadius: "22px 22px 0 0", overflowY: "auto",
-    padding: "28px 22px 52px", background: theme.bg,
-    border: "0.5px solid " + theme.borderStrong, borderBottom: "none",
-    boxShadow: "0 -20px 60px -10px rgba(0,0,0,0.5)",
-    zIndex: 1001, animation: "md-rise 0.28s cubic-bezier(.2,.7,.2,1)",
-  } : {
-    position: "fixed", left: "50%", top: "50%",
-    transform: "translate(-50%, -50%)", width: 480,
-    maxHeight: "85vh", borderRadius: 24, overflowY: "auto",
-    padding: "36px 40px 44px", background: theme.bg,
-    border: "0.5px solid " + theme.borderStrong,
-    boxShadow: "0 40px 80px -20px rgba(0,0,0,0.6)",
-    zIndex: 1001, animation: "md-rise 0.22s cubic-bezier(.2,.7,.2,1)",
+  const err = {
+    fontFamily: "'JetBrains Mono', monospace",
+    fontSize: 9,
+    color: "#e05a5a",
+    letterSpacing: "0.08em",
+    marginTop: 4,
   };
 
-  const brands = ["Apple", "Samsung", "OnePlus", "Xiaomi / Redmi", "POCO", "Vivo", "Oppo", "realme", "iQOO", "Motorola", "Asus", "Nothing", "Other"];
-  const issues = ["Screen Damage", "Battery Replacement", "Camera Issue", "Charging Port", "Speaker / Mic", "Water Damage", "Software Issue", "Other"];
+  const sheet = isMobile
+    ? {
+        position: "fixed",
+        left: 0,
+        right: 0,
+        bottom: 0,
+        maxHeight: "92vh",
+        borderRadius: "22px 22px 0 0",
+        overflowY: "auto",
+        padding: "28px 22px 52px",
+        background: theme.bg,
+        border: "0.5px solid " + theme.borderStrong,
+        borderBottom: "none",
+        boxShadow: "0 -20px 60px -10px rgba(0,0,0,0.5)",
+        zIndex: 1001,
+        animation: "md-rise 0.28s cubic-bezier(.2,.7,.2,1)",
+      }
+    : {
+        position: "fixed",
+        left: "50%",
+        top: "50%",
+        transform: "translate(-50%, -50%)",
+        width: 480,
+        maxHeight: "85vh",
+        borderRadius: 24,
+        overflowY: "auto",
+        padding: "36px 40px 44px",
+        background: theme.bg,
+        border: "0.5px solid " + theme.borderStrong,
+        boxShadow: "0 40px 80px -20px rgba(0,0,0,0.6)",
+        zIndex: 1001,
+        animation: "md-rise 0.22s cubic-bezier(.2,.7,.2,1)",
+      };
+
+  const brands = [
+    "Apple",
+    "Samsung",
+    "OnePlus",
+    "Xiaomi / Redmi",
+    "POCO",
+    "Vivo",
+    "Oppo",
+    "realme",
+    "iQOO",
+    "Motorola",
+    "Asus",
+    "Nothing",
+    "Other",
+  ];
+  const issues = [
+    "Screen Damage",
+    "Battery Replacement",
+    "Camera Issue",
+    "Charging Port",
+    "Speaker / Mic",
+    "Water Damage",
+    "Software Issue",
+    "Other",
+  ];
 
   return (
     <div>
-      <div onClick={onClose} style={{
-        position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
-        background: dark ? "rgba(0,0,0,0.72)" : "rgba(0,0,0,0.45)",
-        zIndex: 1000, animation: "md-fade 0.18s ease",
-      }} />
-      <div ref={modalRef} role="dialog" aria-modal="true" aria-label="Book a Repair" style={sheet}>
-        <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 24 }}>
+      <div
+        onClick={onClose}
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: dark ? "rgba(0,0,0,0.72)" : "rgba(0,0,0,0.45)",
+          zIndex: 1000,
+          animation: "md-fade 0.18s ease",
+        }}
+      />
+      <div
+        ref={modalRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Book a Repair"
+        style={sheet}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "flex-start",
+            justifyContent: "space-between",
+            marginBottom: 24,
+          }}
+        >
           <div>
-            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, color: theme.gold, letterSpacing: "0.28em", textTransform: "uppercase" }}>
+            <div
+              style={{
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: 9,
+                color: theme.gold,
+                letterSpacing: "0.28em",
+                textTransform: "uppercase",
+              }}
+            >
               BOOK A REPAIR · HYDERABAD
             </div>
-            <div style={{ fontFamily: fonts.display, fontStyle: "italic", fontSize: 28, color: theme.fg, lineHeight: 1.1, marginTop: 8 }}>
+            <div
+              style={{
+                fontFamily: fonts.display,
+                fontStyle: "italic",
+                fontSize: 28,
+                color: theme.fg,
+                lineHeight: 1.1,
+                marginTop: 8,
+              }}
+            >
               Let's fix it.
             </div>
           </div>
-          <button onClick={onClose} aria-label="Close" style={{
-            width: 36, height: 36, borderRadius: "50%",
-            border: "0.5px solid " + theme.borderStrong,
-            background: "transparent", color: theme.fgMuted,
-            cursor: "pointer", display: "grid", placeItems: "center", flexShrink: 0, marginTop: 4,
-          }}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6"><path d="M18 6L6 18M6 6l12 12"/></svg>
+          <button
+            onClick={onClose}
+            aria-label="Close"
+            style={{
+              width: 36,
+              height: 36,
+              borderRadius: "50%",
+              border: "0.5px solid " + theme.borderStrong,
+              background: "transparent",
+              color: theme.fgMuted,
+              cursor: "pointer",
+              display: "grid",
+              placeItems: "center",
+              flexShrink: 0,
+              marginTop: 4,
+            }}
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+            >
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
           </button>
         </div>
 
@@ -135,50 +257,129 @@ function BookingModal({ theme, fonts, isMobile, dark, open, onClose }) {
             <div style={{ color: theme.gold, marginBottom: 12 }}>
               <I2 name="check" size={36} stroke={1.4} color={theme.gold} />
             </div>
-            <div style={{ fontFamily: fonts.display, fontStyle: "italic", fontSize: 22, color: theme.fg }}>
+            <div
+              style={{
+                fontFamily: fonts.display,
+                fontStyle: "italic",
+                fontSize: 22,
+                color: theme.fg,
+              }}
+            >
               Opening WhatsApp...
             </div>
-            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, color: theme.fgMuted, letterSpacing: "0.18em", marginTop: 10 }}>
+            <div
+              style={{
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: 9,
+                color: theme.fgMuted,
+                letterSpacing: "0.18em",
+                marginTop: 10,
+              }}
+            >
               YOUR BOOKING REQUEST IS READY
             </div>
           </div>
         ) : (
           <div>
             <label style={lbl}>Your Name</label>
-            <input type="text" placeholder="Full name" value={form.name} onChange={(e) => update("name", e.target.value)} style={inp} />
+            <input
+              type="text"
+              placeholder="Full name"
+              value={form.name}
+              onChange={(e) => update("name", e.target.value)}
+              style={inp}
+            />
             {errors.name && <div style={err}>{errors.name}</div>}
 
             <label style={lbl}>Mobile Number</label>
-            <input type="tel" placeholder="10-digit number" value={form.phone} onChange={(e) => update("phone", e.target.value)} style={inp} />
+            <input
+              type="tel"
+              placeholder="10-digit number"
+              value={form.phone}
+              onChange={(e) => update("phone", e.target.value)}
+              style={inp}
+            />
             {errors.phone && <div style={err}>{errors.phone}</div>}
 
             <label style={lbl}>Device Brand</label>
-            <select value={form.brand} onChange={(e) => update("brand", e.target.value)} style={{ ...inp, appearance: "none", WebkitAppearance: "none" }}>
+            <select
+              value={form.brand}
+              onChange={(e) => update("brand", e.target.value)}
+              style={{ ...inp, appearance: "none", WebkitAppearance: "none" }}
+            >
               <option value="">Select brand</option>
-              {brands.map((b) => <option key={b} value={b} style={{ background: theme.bg, color: theme.fg }}>{b}</option>)}
+              {brands.map((b) => (
+                <option
+                  key={b}
+                  value={b}
+                  style={{ background: theme.bg, color: theme.fg }}
+                >
+                  {b}
+                </option>
+              ))}
             </select>
             {errors.brand && <div style={err}>{errors.brand}</div>}
 
             <label style={lbl}>Issue Type</label>
-            <select value={form.issue} onChange={(e) => update("issue", e.target.value)} style={{ ...inp, appearance: "none", WebkitAppearance: "none" }}>
+            <select
+              value={form.issue}
+              onChange={(e) => update("issue", e.target.value)}
+              style={{ ...inp, appearance: "none", WebkitAppearance: "none" }}
+            >
               <option value="">Select issue</option>
-              {issues.map((iss) => <option key={iss} value={iss} style={{ background: theme.bg, color: theme.fg }}>{iss}</option>)}
+              {issues.map((iss) => (
+                <option
+                  key={iss}
+                  value={iss}
+                  style={{ background: theme.bg, color: theme.fg }}
+                >
+                  {iss}
+                </option>
+              ))}
             </select>
             {errors.issue && <div style={err}>{errors.issue}</div>}
 
             <label style={lbl}>Additional Note (optional)</label>
-            <textarea placeholder="Any details about your device or issue..." value={form.note} onChange={(e) => update("note", e.target.value)}
-              style={{ ...inp, height: 80, padding: "12px 14px", resize: "vertical" }} />
+            <textarea
+              placeholder="Any details about your device or issue..."
+              value={form.note}
+              onChange={(e) => update("note", e.target.value)}
+              style={{
+                ...inp,
+                height: 80,
+                padding: "12px 14px",
+                resize: "vertical",
+              }}
+            />
 
-            <button onClick={submit} style={{
-              width: "100%", height: 52, border: "none", cursor: "pointer",
-              background: "linear-gradient(180deg, " + theme.gold + ", " + theme.goldDeep + ")",
-              color: theme.navy, borderRadius: 14, fontFamily: fonts.body,
-              fontWeight: 600, fontSize: 13, letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              boxShadow: "0 12px 30px -10px " + theme.gold + "88",
-              display: "flex", alignItems: "center", justifyContent: "center", gap: 8, marginTop: 24,
-            }}>
+            <button
+              onClick={submit}
+              style={{
+                width: "100%",
+                height: 52,
+                border: "none",
+                cursor: "pointer",
+                background:
+                  "linear-gradient(180deg, " +
+                  theme.gold +
+                  ", " +
+                  theme.goldDeep +
+                  ")",
+                color: theme.navy,
+                borderRadius: 14,
+                fontFamily: fonts.body,
+                fontWeight: 600,
+                fontSize: 13,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                boxShadow: "0 12px 30px -10px " + theme.gold + "88",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 8,
+                marginTop: 24,
+              }}
+            >
               <I2 name="whats" size={18} stroke={1.4} color={theme.navy} />
               Send via WhatsApp
             </button>
@@ -1231,7 +1432,9 @@ function Location({ theme, fonts, cardKind }) {
               <I2 name="arrow" size={14} /> Directions
             </button>
             <button
-              onClick={() => { window.location.href = "tel:+918008404707"; }}
+              onClick={() => {
+                window.location.href = "tel:+918008404707";
+              }}
               style={{
                 flex: 1,
                 height: 44,
@@ -1332,15 +1535,31 @@ function Contact({ theme, fonts, cardKind, onBook }) {
         style={{ display: "flex", flexDirection: "column", gap: 12 }}
       >
         {[
-          { ic: "phone", l: "Call",      v: "+91 80084 04707",       href: "tel:+918008404707" },
-          { ic: "whats", l: "WhatsApp",  v: "+91 98497 98969",       href: "https://wa.me/919849798969" },
-          { ic: "mail",  l: "Email",     v: "mobiledoctor@gmail.com",href: "mailto:mobiledoctor@gmail.com" },
+          {
+            ic: "phone",
+            l: "Call",
+            v: "+91 98497 98969",
+            href: "tel:+919849798969",
+          },
+          {
+            ic: "whats",
+            l: "WhatsApp",
+            v: "+91 80084 04707",
+            href: "https://wa.me/918008404707",
+          },
+          {
+            ic: "mail",
+            l: "Email",
+            v: "mobiledoctor@gmail.com",
+            href: "mailto:mobiledoctor@gmail.com",
+          },
         ].map((c, i) => (
           <div
             key={c.l}
             className="reveal"
             onClick={() => {
-              if (c.href.startsWith("http")) window.open(c.href, "_blank", "noopener");
+              if (c.href.startsWith("http"))
+                window.open(c.href, "_blank", "noopener");
               else window.location.href = c.href;
             }}
             style={{
