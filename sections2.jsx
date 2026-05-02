@@ -1433,7 +1433,7 @@ function Location({ theme, fonts, cardKind }) {
             </button>
             <button
               onClick={() => {
-                window.location.href = "tel:+918008404707";
+                window.location.href = "tel:+919849798969";
               }}
               style={{
                 flex: 1,
